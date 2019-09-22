@@ -2,14 +2,17 @@ package com.example.pricecalculator;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
-    int quantity = 0;
+    int quantity = 1;
     int total_amount = 0;
 
     @Override
@@ -19,11 +22,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void increment_quantity(View view){
+        if(quantity > 99){
+            return;
+        }
         quantity++;
         display_quantity(quantity);
     }
 
     public void decrement_quantity(View view){
+        if(quantity == 1){
+            return;
+        }
         quantity--;
         display_quantity(quantity);
     }
@@ -44,7 +53,20 @@ public class MainActivity extends AppCompatActivity {
 //        Toast.makeText(this, Boolean.toString(hasChocolate), Toast.LENGTH_SHORT).show();
 
         String order_summary = createOrderSummary(total_amount, hasWhippedCream, hasChocolate);
-        totalAmountTextView.setText(order_summary);
+//        totalAmountTextView.setText(order_summary);
+        String main_addresses[] = { "sanjaypj@gmail.com" };
+        composeEmail(main_addresses, "order", order_summary);
+    }
+
+    public void composeEmail(String[] addresses, String subject, String order_summary) {
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("text/plain");
+        intent.putExtra(Intent.EXTRA_EMAIL, addresses);
+        intent.putExtra(Intent.EXTRA_SUBJECT, subject);
+        intent.putExtra(Intent.EXTRA_TEXT, order_summary);
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        }
     }
 
     private void display_quantity(int number){
@@ -53,7 +75,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private String createOrderSummary(int price, boolean addWhippedCream, boolean addChocolate) {
-        String priceMessage = "Name: Lyla the Labyrinth";
+        EditText nameTextBox = (EditText) findViewById(R.id.name_text_box);
+        String nameTextBoxContent = nameTextBox.getText().toString();
+
+        String priceMessage = "Name: " + nameTextBoxContent;
         priceMessage += "\nAdd whipped cream? " + addWhippedCream;
         priceMessage += "\nAdd chocolate? " + addChocolate;
         priceMessage += "\nQuantity: " + quantity;

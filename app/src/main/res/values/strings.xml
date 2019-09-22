@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Price Calculator</string>
+    <string name="name_plain_text_hint">Name</string>
 </resources>

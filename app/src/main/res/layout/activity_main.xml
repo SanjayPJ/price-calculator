@@ -20,11 +20,21 @@
             app:layout_constraintTop_toTopOf="parent"
             android:padding="10dp">
 
+            <EditText
+                android:id="@+id/name_text_box"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:ems="10"
+                android:hint="@string/name_plain_text_hint"
+                android:inputType="textPersonName" />
+
             <TextView
                 android:id="@+id/textView2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="toppings"
+                style="@style/GreenText"
                 android:textAllCaps="true" />
 
             <CheckBox
@@ -49,6 +59,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:text="Quantity"
+                style="@style/GreenText"
                 android:textAllCaps="true" />
 
             <LinearLayout
@@ -72,7 +83,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_weight="1"
-                    android:text="0"
+                    android:text="1"
                     android:textColor="@android:color/background_dark" />
 
                 <Button
@@ -93,6 +104,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:text="order summary"
+                style="@style/GreenText"
                 android:textAllCaps="true" />
 
             <TextView
